@@ -1,0 +1,19 @@
+// $danger: #c29938;
+
+
+@import "../../node_modules/bootstrap/scss/functions"; //the functions file must be before the variables,becuause it uses it.
+@import "../../node_modules/bootstrap/scss/variables";
+
+
+$custom-theme-colors: (
+    "saiYellow": #f8e16c,
+    "saiRed":#f44413,
+    "saiYellowBg": #fcefaf,
+    "workoutBg": #f9f3d6,
+);
+
+//merge our map with the original one::after
+//original-map: map-merge ($our new map, $original-map)
+$theme-colors: map-merge($custom-theme-colors, $theme-colors);
+
+@import"../../node_modules/bootstrap/scss/bootstrap.scss"
