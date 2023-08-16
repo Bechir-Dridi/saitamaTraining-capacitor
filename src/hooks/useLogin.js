@@ -11,12 +11,12 @@ export const useLogin = () => {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch("https://saitama-server.onrender.com/api/user/login", {
+        const response = await fetch("/api/user/login", {
             //I didn't mention localhost 3000 because in package.json,
             //I added this=>  "proxy": "http://localhost:4000",
             //It avoids also cors error
             method: "POST",
-            headers: { "Content-Type": 'application/json' },
+            headers: { "Content-Type": 'application/json', },
             body: JSON.stringify({ email, password })
         })
         const json = await response.json()
