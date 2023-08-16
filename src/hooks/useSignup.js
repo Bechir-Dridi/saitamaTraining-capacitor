@@ -11,7 +11,7 @@ export const useSignup = () => {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch("/api/user/signup", {
+        const response = await fetch("https://saitama-server.onrender.com/api/user/signup", {
             //I didn't mention localhost 3000 because in package.json,
             //I added this=>  "proxy": "http://localhost:4000",
             //It avoid also cors error

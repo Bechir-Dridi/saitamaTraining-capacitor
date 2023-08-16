@@ -11,7 +11,7 @@ const Home = () => {
 
     const fetchWorkouts = async () => {
         try {
-            const response = await fetch('/api/workouts', {
+            const response = await fetch('https://saitama-server.onrender.com/api/workouts', {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${user.token}`

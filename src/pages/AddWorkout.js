@@ -18,7 +18,7 @@ const AddWorkout = () => {
 
         const workout = { title, reps }
 
-        const response = await fetch("/api/workouts",
+        const response = await fetch("https://saitama-server.onrender.com/api/workouts",
             {
                 method: "POST",
                 body: JSON.stringify(workout),

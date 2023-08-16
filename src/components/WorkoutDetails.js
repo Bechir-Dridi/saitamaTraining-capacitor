@@ -26,7 +26,7 @@ const WorkoutDetails = ({ workout, index, user, dispatch }) => {
                 return
             }
 
-            const response = await fetch(`/api/workouts/${workout._id}`, {
+            const response = await fetch(`https://saitama-server.onrender.com/api/workouts/${workout._id}`, {
                 method: 'DELETE',
                 headers: {
                     //A4.send the authorization headers
@@ -60,7 +60,7 @@ const WorkoutDetails = ({ workout, index, user, dispatch }) => {
 
             const newData = { title, reps };
 
-            const response = await fetch(`/api/workouts/${workout._id}`, {
+            const response = await fetch(`https://saitama-server.onrender.com/api/workouts/${workout._id}`, {
                 method: 'PUT', // Use "PUT" to update data
                 headers: {
                     'Content-Type': 'application/json',
