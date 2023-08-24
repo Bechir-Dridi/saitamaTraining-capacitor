@@ -46,7 +46,7 @@ const Training = () => {
 
                     <div class="row mt-5 justify-content-around align-items-center">
                         <div class="col-8 col-lg-8">
-                            <p class="lead text-muted text-center">This app is designed to help you track your journey to reach the goal of 100 pushups, 100 situps, and an 8-kilometer jog.</p>
+                            <p class="lead text-muted text-center">This app is designed to help you track your journey to reach the goal of 100 pushups, 100 situps, 100 squats and an 8-kilometer jog.</p>
                         </div>
                     </div>
 
@@ -67,6 +67,12 @@ const Training = () => {
                                     </div>
                                 </div>
                                 <div class="carousel-item carousel-image bg-img-3" data-bs-interval="3000">
+                                    {/* <img src={situps} alt="situps" /> */}
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>squats</h5>
+                                    </div>
+                                </div>
+                                <div class="carousel-item carousel-image bg-img-4" data-bs-interval="3000">
                                     <div class="carousel-caption d-none d-md-block">
                                         {/* <img src={jog} alt="jog" /> */}
                                         <h5>jog</h5>

@@ -67,6 +67,10 @@ header section ul {
 }
 
 .training .bg-img-3 {
+  background-image: url('./media/squats.jpg');
+}
+
+.training .bg-img-4 {
   background-image: url('./media/jog.jpg');
 }
 
