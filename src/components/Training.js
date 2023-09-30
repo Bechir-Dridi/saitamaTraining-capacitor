@@ -2,6 +2,7 @@ import { React, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import "../index.css"
 //import media
+import saiLogo from "../media/saiLogo.png"
 import fitnessTest from '../media/fitnessTest.mp4'
 
 
@@ -16,8 +17,17 @@ const Training = () => {
 
 
     return (
-        <div>
-            <section className='training'>
+        <div className='training-container'>
+            <section className='training mt-5'>
+
+                <div class="container-md">
+                    <div class="row g-5  align-items-center">
+                        <div class="col-12 col-lg-12 justify-content-center d-flex align-items-center">
+                            <img src={saiLogo} width="80px" alt="Logo" class="img-fluid" />
+                            <Link to="/" class="text-muted fst-italic ms-3 display-5 text-center text-decoration-none">Go beyond your limits</Link>
+                        </div>
+                    </div>
+                </div>
 
                 <div className="vid justify-content-around align-items-center">
                     <div className="video-container">

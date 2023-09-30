@@ -1,28 +1,38 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import WorkoutDetails from '../components/WorkoutDetails';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useWorkoutContext } from '../hooks/useWorkoutContext';
+//import plugin:
+//import plugin:
+import { CapacitorHttp } from '@capacitor/core';
+
 
 const Home = () => {
+    const [isLoading, setIsLoading] = useState(null)
+
     const { user } = useAuthContext();
     const { workouts, dispatch } = useWorkoutContext();
     const navigate = useNavigate();
 
     const fetchWorkouts = async () => {
+        setIsLoading(true)
         try {
-            const response = await fetch('https://saitama-server.onrender.com/api/workouts', {
+            const response = await CapacitorHttp.request({
                 method: 'GET',
+                url: 'https://saitama-server.onrender.com/api/workouts',
                 headers: {
                     Authorization: `Bearer ${user.token}`
                 }
             });
 
-            if (response.ok) {
-                const json = await response.json();
+            const json = await response.data
+            if (!json.error) {
+                setIsLoading(false)
                 dispatch({ type: 'SET_WORKOUTS', payload: json.workouts });
             }
         } catch (error) {
+            setIsLoading(false)
             console.error('Error fetching workouts:', error);
         }
     };
@@ -40,7 +50,9 @@ const Home = () => {
     }
 
     return (
-        <div className="Home">
+        <div className="Home mt-5 pt-3">
+            {isLoading && <div className="py-1 display-5 text-center">Loading...</div>}
+
             <section id="topics">
                 <div className="container-md">
                     <div className="row g-5 justify-content-around align-items-center">

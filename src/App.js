@@ -25,12 +25,14 @@ function App() {
     <div className="app-container bg-saiYellowBg">
       <BrowserRouter>
         {/* Navbar should be inside the BrowserRouter */}
-        <Navbar />
+        <div className="fixed-top">
+          <Navbar />
+        </div>
         <Routes>
 
           {/* A2. */}
           <Route path="/" exact element={user ? <Home /> : <Navigate to="/training" />} />
-          <Route path="/training" element={!user ? <Training /> : null} />
+          <Route path="/training" element={!user ? <Training /> : <Navigate to="/" />} />
           <Route path="/add_workout" element={user ? <AddWorkout /> : <Navigate to="/login" />} />
           <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/" />} />
           <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />

@@ -5,6 +5,9 @@ import "../index.css"
 import bin from '../media/bin.svg';
 import edit from '../media/edit.svg';
 
+//import plugin:
+import { CapacitorHttp } from '@capacitor/core';
+
 //import Context
 // import { useWorkoutContext } from "../hooks/useWorkoutContext"
 //A------ Authorized req ------
@@ -26,16 +29,19 @@ const WorkoutDetails = ({ workout, index, user, dispatch }) => {
                 return
             }
 
-            const response = await fetch(`https://saitama-server.onrender.com/api/workouts/${workout._id}`, {
+            const response = await CapacitorHttp.request({
                 method: 'DELETE',
+                url: `https://saitama-server.onrender.com/api/workouts/${workout._id}`,
                 headers: {
                     //A4.send the authorization headers
                     'Authorization': `Bearer ${user.token}`
                 }
 
             });
-            const json = await response.json();
-            if (response.ok) {
+            //const json = await response.json();
+            const json = await response.data
+            //if (response.ok) {
+            if (!json.error) {
                 console.log('The deleted workout', json.workout);
                 dispatch({ type: 'DELETE_WORKOUT', payload: json.workout })
                 //window.location.reload();
@@ -60,19 +66,20 @@ const WorkoutDetails = ({ workout, index, user, dispatch }) => {
 
             const newData = { title, reps };
 
-            const response = await fetch(`https://saitama-server.onrender.com/api/workouts/${workout._id}`, {
+            const response = await CapacitorHttp.request({
                 method: 'PUT', // Use "PUT" to update data
+                url: `https://saitama-server.onrender.com/api/workouts/${workout._id}`,
                 headers: {
                     'Content-Type': 'application/json',
                     //A4.send the authorization headers
                     'Authorization': `Bearer ${user.token}`
                 },
-                body: JSON.stringify(newData),
+                data: JSON.stringify(newData),
             });
 
-            //const json = await response.json()
+            const json = await response.data
 
-            if (response.ok) {
+            if (!json.error) {
                 const updatedWorkout = { ...workout, ...newData };
                 dispatch({ type: 'UPDATE_WORKOUT', payload: { index, workout: updatedWorkout } });
                 console.log("the new workout", updatedWorkout)
@@ -91,7 +98,6 @@ const WorkoutDetails = ({ workout, index, user, dispatch }) => {
     const toggleHandler = () => {
         setToggle(!toggle)
     }
-
 
     return (
         <div className="workout-details">

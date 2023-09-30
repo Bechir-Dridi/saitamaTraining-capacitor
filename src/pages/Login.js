@@ -24,7 +24,7 @@ const Login = () => {
 
     return (
         //A2. set the form
-        <div class="container-md">
+        <div class="container-md mt-5 pt-3">
             <div class="row g-5 justify-content-around align-items-center">
                 <div class="col-md-6">
                     <form onSubmit={handleSubmit} className=" bg-workoutBg rounded border shadow">
@@ -54,6 +54,7 @@ const Login = () => {
                         </button>
 
                         {/* B3. */}
+                        {isLoading && <div className="py-1 text-center">Loading...</div>}
                         {error && <div className="text-danger py-1">{error}</div>}
                     </form>
                 </div>

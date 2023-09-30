@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { useAuthContext } from "./useAuthContext"
+//import plugin:
+import { CapacitorHttp } from '@capacitor/core';
 
 export const useLogin = () => {
     //A1. set the error and loading
@@ -11,22 +13,26 @@ export const useLogin = () => {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch("https://saitama-server.onrender.com/api/user/login", {
+        const response = await CapacitorHttp.request({
             //I didn't mention localhost 3000 because in package.json,
             //I added this=>  "proxy": "http://localhost:4000",
             //It avoids also cors error
-            method: "POST",
-            headers: { "Content-Type": 'application/json', },
-            body: JSON.stringify({ email, password })
-        })
-        const json = await response.json()
 
-        if (!response.ok) {
+            method: "POST",
+            url: "https://saitama-server.onrender.com/api/user/login",
+            headers: { "Content-Type": 'application/json', },
+            data: JSON.stringify({ email, password })
+        })
+        //const json = await response.json()
+        const json = await response.data
+        console.log("ohoLog:", json)
+
+        if (json.error) {
             setIsLoading(false)
             setError(json.error)
         }
 
-        if (response.ok) {
+        if (!json.error) {
             //1.save the user to local storage
             localStorage.setItem("user", JSON.stringify(json)) //json=>"email" and "token"
             //2.update the authContext(change the login state)

@@ -1,6 +1,8 @@
 import { useState } from "react";
 //A1. make access to the user:
 import { useAuthContext } from '../hooks/useAuthContext'
+//import plugin:
+import { CapacitorHttp } from '@capacitor/core';
 
 
 const AddWorkout = () => {
@@ -18,21 +20,23 @@ const AddWorkout = () => {
 
         const workout = { title, reps }
 
-        const response = await fetch("https://saitama-server.onrender.com/api/workouts",
+        const response = await CapacitorHttp.request(
             {
                 method: "POST",
-                body: JSON.stringify(workout),
+                url: "https://saitama-server.onrender.com/api/workouts",
+                data: JSON.stringify(workout),
                 headers: {
                     "content-Type": "application/json",
                     'Authorization': `Bearer ${user.token}`
                 }
             }
         )
-        const json = await response.json()
-        if (!response.ok) {
+        const json = await response.data
+        if (json.Post_error) {
             setError(json.Post_error)
+            setIsLoading(false)
         }
-        if (response.ok) {
+        if (!json.Post_error) {
             setTitle("")
             setReps("")
             setIsLoading(false)
@@ -43,7 +47,7 @@ const AddWorkout = () => {
 
 
     return (
-        <div class="container-md">
+        <div class="container-md  mt-5 pt-3">
             <div class="row g-5 justify-content-around align-items-center">
                 <div class="col-md-6">
                     <form onSubmit={handleSubmit} className=" bg-workoutBg rounded border shadow">
