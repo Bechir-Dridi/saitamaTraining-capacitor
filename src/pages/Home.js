@@ -68,7 +68,7 @@ const Home = () => {
                                             dispatch={dispatch}
                                         />
                                     ))
-                                ) : null /* No need for Navigate here */}
+                                ) : navigate("/add_workout")}
                             </div>
                         </div>
                     </div>
