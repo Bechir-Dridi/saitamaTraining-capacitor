@@ -6,6 +6,6 @@
 
 ### this mobile app built using React & Capacitor ###
  
-you would need these dependencies for capacitor
-npm install -g @capacitor/cli 
-npm install --save-dev @capacitor/core
+you would need these dependencies for capacitor:
+npm i @capacitor/core
+npm i -D @capacitor/cli
